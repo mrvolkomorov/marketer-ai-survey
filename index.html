@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Входная анкета: индивидуальное обучение маркетолога</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 24px 16px; color: #1f2937; line-height: 1.5; }
+
+.container { max-width: 760px; margin: 0 auto; background: #ffffff; border-radius: 16px; box-shadow: rgba(0,0,0,0.2) 0 20px 60px; overflow: hidden; }
+
+.header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; padding: 40px 32px; }
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+.header p { font-size: 16px; opacity: 0.95; }
+
+.intro { padding: 24px 32px; background: #f9fafb; border-left: 4px solid #667eea; margin: 24px; border-radius: 8px; font-size: 15px; color: #4b5563; }
+.intro strong { color: #1f2937; }
+
+form { padding: 0 32px 40px; }
+
+.block { margin: 32px 0; padding-top: 24px; border-top: 1px solid #e5e7eb; }
+.block:first-of-type { border-top: none; padding-top: 0; }
+
+.block-title { font-size: 20px; font-weight: 700; color: #1f2937; margin-bottom: 6px; }
+.block-desc { font-size: 14px; color: #6b7280; margin-bottom: 20px; }
+
+.question { margin-bottom: 22px; padding: 16px; border-radius: 8px; background: #fafbfc; transition: background 0.2s; }
+.question:focus-within { background: #f3f4f6; }
+
+.question-label { font-size: 15px; font-weight: 600; color: #1f2937; margin-bottom: 10px; display: block; }
+.required { color: #dc2626; }
+.question-hint { font-size: 13px; color: #6b7280; margin-top: 6px; }
+
+input[type="text"], input[type="email"], textarea, select { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; font-family: inherit; background: #ffffff; transition: border 0.15s; }
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus, select:focus { outline: none; border-color: #667eea; box-shadow: rgba(102,126,234,0.15) 0 0 0 3px; }
+
+textarea { min-height: 90px; resize: vertical; }
+
+.options { display: flex; flex-direction: column; gap: 8px; }
+.option { display: flex; align-items: center; padding: 10px 12px; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: 0.15s; }
+.option:hover { background: #f3f4f6; border-color: #d1d5db; }
+.option input { margin-right: 10px; cursor: pointer; }
+.option span { font-size: 15px; }
+
+.situation { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 14px 16px; margin-bottom: 12px; border-radius: 6px; font-size: 14px; color: #92400e; }
+
+.submit-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; border: none; border-radius: 10px; font-size: 17px; font-weight: 600; cursor: pointer; margin-top: 24px; transition: transform 0.1s, box-shadow 0.2s; }
+.submit-btn:hover { transform: translateY(-1px); box-shadow: rgba(102,126,234,0.3) 0 10px 25px; }
+.submit-btn:active { transform: translateY(0); }
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.footer { text-align: center; padding: 20px 32px 32px; font-size: 13px; color: #6b7280; }
+
+.scale-row { display: grid; grid-template-columns: 1fr repeat(5, 60px); gap: 6px; align-items: center; padding: 6px 0; border-bottom: 1px solid #f3f4f6; }
+.scale-row:last-child { border-bottom: none; }
+.scale-label { font-size: 14px; color: #374151; }
+.scale-row label { text-align: center; font-size: 13px; color: #6b7280; cursor: pointer; }
+.scale-row input { margin-right: 4px; cursor: pointer; }
+
+.progress { height: 4px; background: #e5e7eb; position: relative; overflow: hidden; }
+.progress-bar { height: 100%; background: linear-gradient(90deg, #10b981, #34d399); width: 0%; transition: width 0.3s; }
+.progress-text { text-align: right; font-size: 12px; color: #6b7280; padding: 4px 32px; background: #f9fafb; }
+
+.thankyou { padding: 60px 32px; text-align: center; }
+.thankyou h2 { color: #10b981; font-size: 26px; margin-bottom: 16px; }
+.thankyou p { color: #4b5563; font-size: 16px; margin-bottom: 12px; }
+.thankyou .secondary { font-size: 13px; color: #9ca3af; margin-top: 24px; }
+
+@media (max-width: 600px) {
+  body { padding: 12px 8px; }
+  .header, form { padding-left: 20px; padding-right: 20px; }
+  .intro { margin: 16px; }
+  .header h1 { font-size: 22px; }
+  .scale-row { grid-template-columns: 1fr repeat(5, 40px); }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>Где вы сейчас с ИИ — и куда хотите прийти</h1>
+    <p>Входная анкета перед индивидуальным обучением · 10–12 минут</p>
+  </div>
+
+  <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="progress-text"><span id="progressText">0%</span> заполнено</div>
+
+  <div class="intro">
+    <strong>Это не экзамен.</strong> Нет «правильных» и «неправильных» ответов — только ваш честный опыт. Мы уже знаем, кто вы и чем занимаетесь, поэтому здесь только содержательные вопросы: задачи, опыт с ИИ, барьеры и цели.<br><br>
+    Чем точнее ответы, тем лучше программа подстроится под вас. Если не знаете, как подступиться к ситуационному вопросу, — так и напишите. Это нормальный ответ.
+  </div>
+
+  <form id="mainForm">
+    <div class="question">
+      <label class="question-label">Чтобы я мог прислать персональные рекомендации, оставьте имя и контакт <span class="required">*</span></label>
+      <input type="text" name="participant_name" required placeholder="Как к вам обращаться" style="margin-bottom:10px;">
+      <input type="email" name="participant_contact" required placeholder="Email или Telegram (@ник)">
+    </div>
+
+    <div class="block">
+      <div class="block-title">Блок 1. Рабочий контекст</div>
+      <div class="block-desc">Без служебных вопросов — только то, что влияет на программу.</div>
+
+      <div class="question">
+        <label class="question-label">1. Топ-5 рабочих задач за последнюю неделю <span class="required">*</span></label>
+        <textarea name="q1_top5_tasks" required placeholder="По одной строке на задачу:
+1. Сделать 5 постов о запуске продукта
+2. Свести отчёт по рекламным кампаниям
+3. ..."></textarea>
+        <div class="question-hint">Не думайте долго — пишите так, как приходит в голову.</div>
+      </div>
+
+      <div class="question">
+        <label class="question-label">2. Сколько часов в неделю уходит на рутину, которую хотелось бы автоматизировать?</label>
+        <div class="options">
+          <label class="option"><input type="radio" name="q2_routine_hours" value="Менее 3 часов"><span>Менее 3 часов</span></label>
+          <label class="option"><input type="radio" name="q2_routine_hours" value="3–7 часов"><span>3–7 часов</span></label>
+          <label class="option"><input type="radio" name="q2_routine_hours" value="7–15 часов"><span>7–15 часов</span></label>
+          <label class="option"><input type="radio" name="q2_routine_hours" value="Более 15 часов"><span>Более 15 часов</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="question-label">3. На каких направлениях маркетинга вы сейчас сконцентрированы? (до 3)</label>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="q3_focus" value="Контент и копирайтинг"><span>Контент и копирайтинг</span></label>
+          <label class="option"><input type="checkbox" name="q3_focus" value="SMM и сообщества"><span>SMM и сообщества</span></label>
+          <label class="option"><input type="checkbox" name="q3_focus" value="SEO и поисковый трафик"><span>SEO и поисковый трафик</span></label>
+          <label class="option"><input type="checkbox" name="q3_focus" value="Реклама и performance"><span>Реклама и performance</span></label>
+          <label class="option"><input type="checkbox" name="q3_focus" value="Email и CRM"><span>Email и CRM</span></label>
+          <label class="option"><input type="checkbox" name="q3_focus" value="Аналитика и отчёты"><span>Аналитика и отчёты</span></label>
+          <label class="option"><input type="checkbox" name="q3_focus" value="PR и коммуникации"><span>PR и коммуникации</span></label>
+          <label class="option"><input type="checkbox" name="q3_focus" value="Бренд и стратегия"><span>Бренд и стратегия</span></label>
+          <label class="option"><input type="checkbox" name="q3_focus" value="Мероприятия и ивенты"><span>Мероприятия и ивенты</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="question-label">4. Какая задача «горит» прямо сейчас — та, которую хотелось бы разобрать на ближайшем занятии?</label>
+        <textarea name="q4_burning_task" placeholder="Например: за неделю подготовить 20 креативов под ретаргетинг"></textarea>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-title">Блок 2. Опыт с ИИ</div>
+      <div class="block-desc">Этот блок помогает понять, на каком уровне вы сейчас находитесь.</div>
+
+      <div class="question">
+        <label class="question-label">5. Как давно вы используете ИИ-инструменты в работе?</label>
+        <div class="options">
+          <label class="option"><input type="radio" name="q5_ai_freq" value="Никогда не пробовал(а)"><span>Никогда не пробовал(а)</span></label>
+          <label class="option"><input type="radio" name="q5_ai_freq" value="Пробовал(а) пару раз, без системы"><span>Пробовал(а) пару раз, без системы</span></label>
+          <label class="option"><input type="radio" name="q5_ai_freq" value="От случая к случаю"><span>Использую от случая к случаю (несколько раз в месяц)</span></label>
+          <label class="option"><input type="radio" name="q5_ai_freq" value="Регулярно"><span>Использую регулярно (несколько раз в неделю)</span></label>
+          <label class="option"><input type="radio" name="q5_ai_freq" value="Ежедневно"><span>Использую ежедневно, без ИИ уже не работаю</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="question-label">6. Какие ИИ-инструменты вы пробовали?</label>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="q6_tools" value="ChatGPT (бесплатная)"><span>ChatGPT (бесплатная версия)</span></label>
+          <label class="option"><input type="checkbox" name="q6_tools" value="ChatGPT Plus/Pro"><span>ChatGPT Plus / Pro (платная)</span></label>
+          <label class="option"><input type="checkbox" name="q6_tools" value="Claude"><span>Claude (Anthropic)</span></label>
+          <label class="option"><input type="checkbox" name="q6_tools" value="Gemini"><span>Gemini (Google)</span></label>
+          <label class="option"><input type="checkbox" name="q6_tools" value="GigaChat"><span>GigaChat (Сбер)</span></label>
+          <label class="option"><input type="checkbox" name="q6_tools" value="Алиса Про/YandexGPT"><span>Алиса Про / YandexGPT</span></label>
+          <label class="option"><input type="checkbox" name="q6_tools" value="Qwen"><span>Qwen (Alibaba)</span></label>
+          <label class="option"><input type="checkbox" name="q6_tools" value="DeepSeek"><span>DeepSeek</span></label>
+          <label class="option"><input type="checkbox" name="q6_tools" value="Perplexity"><span>Perplexity (поиск с ИИ)</span></label>
+          <label class="option"><input type="checkbox" name="q6_tools" value="Midjourney"><span>Midjourney</span></label>
+          <label class="option"><input type="checkbox" name="q6_tools" value="Kandinsky/Шедеврум"><span>Kandinsky / Шедеврум</span></label>
+          <label class="option"><input type="checkbox" name="q6_tools" value="ElevenLabs"><span>ElevenLabs или другое озвучивание</span></label>
+          <label class="option"><input type="checkbox" name="q6_tools" value="Suno/Udio"><span>Suno / Udio или другое для музыки</span></label>
+          <label class="option"><input type="checkbox" name="q6_tools" value="Veo/Sora"><span>Veo / Sora или другое для видео</span></label>
+          <label class="option"><input type="checkbox" name="q6_tools" value="Notion AI"><span>Notion AI или встроенные ИИ в рабочих сервисах</span></label>
+        </div>
+        <input type="text" name="q6_tools_other" placeholder="Другое (если есть)" style="margin-top:8px;">
+      </div>
+
+      <div class="question">
+        <label class="question-label">7. Есть ли у вас платная подписка хотя бы на один ИИ-инструмент?</label>
+        <div class="options">
+          <label class="option"><input type="radio" name="q7_subscriptions" value="Нет, всё бесплатное"><span>Нет, всё бесплатное</span></label>
+          <label class="option"><input type="radio" name="q7_subscriptions" value="Да, одна"><span>Да, одна подписка</span></label>
+          <label class="option"><input type="radio" name="q7_subscriptions" value="Да, несколько"><span>Да, несколько подписок</span></label>
+        </div>
+        <input type="text" name="q7_subscriptions_list" placeholder="Если есть — какие именно?" style="margin-top:8px;">
+      </div>
+
+      <div class="question">
+        <label class="question-label">8. Что из перечисленного вы уже делали с помощью ИИ?</label>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="q8_uses" value="Генерация/редактура текстов"><span>Генерация / редактура текстов</span></label>
+          <label class="option"><input type="checkbox" name="q8_uses" value="Посты для соцсетей"><span>Написание постов для соцсетей</span></label>
+          <label class="option"><input type="checkbox" name="q8_uses" value="Заголовки/лиды"><span>Создание заголовков и лидов</span></label>
+          <label class="option"><input type="checkbox" name="q8_uses" value="Рерайт/перефразирование"><span>Рерайт / перефразирование</span></label>
+          <label class="option"><input type="checkbox" name="q8_uses" value="Перевод"><span>Перевод</span></label>
+          <label class="option"><input type="checkbox" name="q8_uses" value="Саммари"><span>Саммари длинных материалов</span></label>
+          <label class="option"><input type="checkbox" name="q8_uses" value="SEO-оптимизация"><span>SEO-оптимизация текстов (Title, Description, ключи)</span></label>
+          <label class="option"><input type="checkbox" name="q8_uses" value="Генерация изображений"><span>Генерация изображений</span></label>
+          <label class="option"><input type="checkbox" name="q8_uses" value="Аудио/озвучка"><span>Генерация аудио / озвучки</span></label>
+          <label class="option"><input type="checkbox" name="q8_uses" value="Видео"><span>Генерация видео</span></label>
+          <label class="option"><input type="checkbox" name="q8_uses" value="Анализ данных"><span>Анализ данных / таблиц</span></label>
+          <label class="option"><input type="checkbox" name="q8_uses" value="Код"><span>Написание кода / скриптов</span></label>
+          <label class="option"><input type="checkbox" name="q8_uses" value="Автоматизация"><span>Автоматизация рабочих процессов</span></label>
+          <label class="option"><input type="checkbox" name="q8_uses" value="Сбор информации"><span>Сбор и анализ информации из интернета</span></label>
+          <label class="option"><input type="checkbox" name="q8_uses" value="Ничего"><span>Ничего из перечисленного</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="question-label">9. Занимались ли вы уже обучением по ИИ раньше?</label>
+        <div class="options">
+          <label class="option"><input type="radio" name="q9_prev_training" value="Нет"><span>Нет, это будет первый опыт</span></label>
+          <label class="option"><input type="radio" name="q9_prev_training" value="Да, давно"><span>Да, но давно</span></label>
+          <label class="option"><input type="radio" name="q9_prev_training" value="Да, недавно"><span>Да, недавно</span></label>
+          <label class="option"><input type="radio" name="q9_prev_training" value="Да, несколько"><span>Да, несколько курсов или воркшопов</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-title">Блок 3. Уровень через ситуации</div>
+      <div class="block-desc">Опишите кратко, как бы вы действовали. 2–4 предложения достаточно.</div>
+
+      <div class="question">
+        <div class="situation"><strong>Ситуация 1: Тексты и заголовки.</strong> За 2 часа нужно 5 вариантов заголовков и лидов для поста о запуске продукта.</div>
+        <label class="question-label">Ваши действия? <span class="required">*</span></label>
+        <textarea name="q10_sit1_headlines" required placeholder="Опишите, как бы вы подошли к задаче"></textarea>
+      </div>
+
+      <div class="question">
+        <div class="situation"><strong>Ситуация 2: Визуал.</strong> Кампании нужен баннер, но в фотобанке ничего подходящего.</div>
+        <label class="question-label">Что будете делать? <span class="required">*</span></label>
+        <textarea name="q11_sit2_visual" required placeholder="Опишите, как бы вы подошли к задаче"></textarea>
+      </div>
+
+      <div class="question">
+        <div class="situation"><strong>Ситуация 3: Фактчек.</strong> ИИ показывает в отчёте по кампании: «CTR вырос на 30%». Перед отправкой отчёта клиенту решаете проверить эту цифру.</div>
+        <label class="question-label">Как проверите? <span class="required">*</span></label>
+        <textarea name="q12_sit3_factcheck" required placeholder="Опишите, как бы вы подошли к задаче"></textarea>
+      </div>
+
+      <div class="question">
+        <div class="situation"><strong>Ситуация 4: Автоматизация.</strong> Хотите, чтобы каждое утро вам приходила сводка: 5 новостей по рынку и упоминания конкурентов.</div>
+        <label class="question-label">С чего начнёте? <span class="required">*</span></label>
+        <textarea name="q13_sit4_automation" required placeholder="Опишите, как бы вы подошли к задаче"></textarea>
+      </div>
+
+      <div class="question">
+        <div class="situation"><strong>Ситуация 5: Конфиденциальность.</strong> Коллега скидывает выгрузку с данными клиентов: «прогони через ИИ, пусть сделает сегментацию».</div>
+        <label class="question-label">Ваши действия? <span class="required">*</span></label>
+        <textarea name="q14_sit5_privacy" required placeholder="Опишите, как бы вы подошли к задаче"></textarea>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-title">Блок 4. Промптинг и агенты</div>
+      <div class="block-desc">Несколько вопросов про техники работы с ИИ.</div>
+
+      <div class="question">
+        <label class="question-label">10. Как вы обычно формулируете запросы к ИИ?</label>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="q15_prompting" value="Короткий вопрос"><span>Пишу короткий вопрос как в поисковик</span></label>
+          <label class="option"><input type="checkbox" name="q15_prompting" value="Роль"><span>Добавляю роль («ты — опытный маркетолог…»)</span></label>
+          <label class="option"><input type="checkbox" name="q15_prompting" value="Формат"><span>Описываю формат результата («дай в виде таблицы»)</span></label>
+          <label class="option"><input type="checkbox" name="q15_prompting" value="Несколько вариантов"><span>Прошу несколько вариантов</span></label>
+          <label class="option"><input type="checkbox" name="q15_prompting" value="Шаблоны"><span>Использую готовые шаблоны</span></label>
+          <label class="option"><input type="checkbox" name="q15_prompting" value="Без системы"><span>Не задумываюсь особо, пишу как придётся</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="question-label">11. Оцените, насколько вы знакомы с этими техниками</label>
+        <div class="question-hint" style="margin-bottom:10px;">1 — не слышал, 5 — регулярно использую</div>
+        <div class="scale-row"><div class="scale-label">Few-shot (примеры в промпте)</div><label><input type="radio" name="q16_fewshot" value="1">1</label><label><input type="radio" name="q16_fewshot" value="2">2</label><label><input type="radio" name="q16_fewshot" value="3">3</label><label><input type="radio" name="q16_fewshot" value="4">4</label><label><input type="radio" name="q16_fewshot" value="5">5</label></div>
+        <div class="scale-row"><div class="scale-label">Chain-of-thought (пошаговое рассуждение)</div><label><input type="radio" name="q16_cot" value="1">1</label><label><input type="radio" name="q16_cot" value="2">2</label><label><input type="radio" name="q16_cot" value="3">3</label><label><input type="radio" name="q16_cot" value="4">4</label><label><input type="radio" name="q16_cot" value="5">5</label></div>
+        <div class="scale-row"><div class="scale-label">System prompt / системные инструкции</div><label><input type="radio" name="q16_systemprompt" value="1">1</label><label><input type="radio" name="q16_systemprompt" value="2">2</label><label><input type="radio" name="q16_systemprompt" value="3">3</label><label><input type="radio" name="q16_systemprompt" value="4">4</label><label><input type="radio" name="q16_systemprompt" value="5">5</label></div>
+        <div class="scale-row"><div class="scale-label">ИИ-агенты с набором инструментов</div><label><input type="radio" name="q16_agents" value="1">1</label><label><input type="radio" name="q16_agents" value="2">2</label><label><input type="radio" name="q16_agents" value="3">3</label><label><input type="radio" name="q16_agents" value="4">4</label><label><input type="radio" name="q16_agents" value="5">5</label></div>
+        <div class="scale-row"><div class="scale-label">RAG / работа с собственными документами</div><label><input type="radio" name="q16_rag" value="1">1</label><label><input type="radio" name="q16_rag" value="2">2</label><label><input type="radio" name="q16_rag" value="3">3</label><label><input type="radio" name="q16_rag" value="4">4</label><label><input type="radio" name="q16_rag" value="5">5</label></div>
+        <div class="scale-row"><div class="scale-label">Локальные LLM</div><label><input type="radio" name="q16_local" value="1">1</label><label><input type="radio" name="q16_local" value="2">2</label><label><input type="radio" name="q16_local" value="3">3</label><label><input type="radio" name="q16_local" value="4">4</label><label><input type="radio" name="q16_local" value="5">5</label></div>
+      </div>
+
+      <div class="question">
+        <label class="question-label">12. Использовали ли вы готовых ИИ-агентов (GPTs, Claude Projects, Gems)?</label>
+        <div class="options">
+          <label class="option"><input type="radio" name="q17_agents" value="Нет, не знаю"><span>Нет, не знаю, что это</span></label>
+          <label class="option"><input type="radio" name="q17_agents" value="Слышал, не пробовал"><span>Слышал, но не пробовал</span></label>
+          <label class="option"><input type="radio" name="q17_agents" value="Пробовал без системы"><span>Пробовал, но без системы</span></label>
+          <label class="option"><input type="radio" name="q17_agents" value="Регулярно"><span>Использую регулярно для работы</span></label>
+          <label class="option"><input type="radio" name="q17_agents" value="Создаю своих"><span>Создаю своих агентов под задачи</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-title">Блок 5. Безопасность и юридические риски</div>
+      <div class="block-desc">Короткий блок про безопасную работу с ИИ.</div>
+
+      <div class="question">
+        <label class="question-label">13. Какие данные вы уже загружали в облачные ИИ?</label>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="q18_data" value="Ничего, боюсь"><span>Ничего, боюсь</span></label>
+          <label class="option"><input type="checkbox" name="q18_data" value="Публичные тексты"><span>Только публичные тексты без указания источников</span></label>
+          <label class="option"><input type="checkbox" name="q18_data" value="Свои тексты"><span>Свои тексты до публикации</span></label>
+          <label class="option"><input type="checkbox" name="q18_data" value="Внутренние документы"><span>Внутренние документы компании</span></label>
+          <label class="option"><input type="checkbox" name="q18_data" value="Персональные данные"><span>Документы с персональными данными</span></label>
+          <label class="option"><input type="checkbox" name="q18_data" value="Финансовые отчёты"><span>Финансовые отчёты / таблицы с деньгами</span></label>
+          <label class="option"><input type="checkbox" name="q18_data" value="Переписка"><span>Переписку с клиентами или партнёрами</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="question-label">14. Какие данные точно нельзя загружать в публичные ИИ?</label>
+        <textarea name="q19_privacy_rules" placeholder="Напишите, что помните (опционально)"></textarea>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-title">Блок 6. Барьеры и страхи</div>
+      <div class="block-desc">Что мешает использовать ИИ чаще и глубже.</div>
+
+      <div class="question">
+        <label class="question-label">15. Что больше всего мешает вам использовать ИИ в работе? (до 3 вариантов)</label>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="q20_barriers" value="Нет времени"><span>Нет времени разбираться</span></label>
+          <label class="option"><input type="checkbox" name="q20_barriers" value="Не понимаю применение"><span>Не понимаю, как применять к своим задачам</span></label>
+          <label class="option"><input type="checkbox" name="q20_barriers" value="Боюсь ошибок"><span>Боюсь ошибок и галлюцинаций</span></label>
+          <label class="option"><input type="checkbox" name="q20_barriers" value="Руководство"><span>Руководство или клиент не разрешает / скептически настроен</span></label>
+          <label class="option"><input type="checkbox" name="q20_barriers" value="Нет платных"><span>Нет доступа к платным версиям</span></label>
+          <label class="option"><input type="checkbox" name="q20_barriers" value="Нет VPN"><span>Нет VPN / инструменты недоступны</span></label>
+          <label class="option"><input type="checkbox" name="q20_barriers" value="Не проверяю"><span>Не понимаю, как проверить результат</span></label>
+          <label class="option"><input type="checkbox" name="q20_barriers" value="Юр. риски"><span>Юридические риски</span></label>
+        </div>
+        <input type="text" name="q20_barriers_other" placeholder="Другое (если есть)" style="margin-top:8px;">
+      </div>
+
+      <div class="question">
+        <label class="question-label">16. Был ли случай, когда ИИ вас подвёл?</label>
+        <textarea name="q21_ai_failed" placeholder="Если да — расскажите коротко (опционально)"></textarea>
+      </div>
+
+      <div class="question">
+        <label class="question-label">17. Насколько вы уверены, что сможете отличить качественный результат ИИ от некачественного?</label>
+        <div class="options">
+          <label class="option"><input type="radio" name="q22_confidence" value="Совсем не уверен"><span>Совсем не уверен(а)</span></label>
+          <label class="option"><input type="radio" name="q22_confidence" value="Скорее не уверен"><span>Скорее не уверен(а)</span></label>
+          <label class="option"><input type="radio" name="q22_confidence" value="Скорее уверен"><span>Скорее уверен(а)</span></label>
+          <label class="option"><input type="radio" name="q22_confidence" value="Уверен"><span>Уверен(а)</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-title">Блок 7. Цели обучения</div>
+      <div class="block-desc">Последний блок — про то, что вы хотите получить от обучения.</div>
+
+      <div class="question">
+        <label class="question-label">18. Главное, что вы хотите получить от обучения <span class="required">*</span></label>
+        <input type="text" name="q23_main_goal" required placeholder="Одной фразой">
+      </div>
+
+      <div class="question">
+        <label class="question-label">19. Три главных навыка, которые хотите освоить</label>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="q24_skills" value="Промпты"><span>Писать сильные промпты</span></label>
+          <label class="option"><input type="checkbox" name="q24_skills" value="Визуал"><span>Делать визуал (иллюстрации, баннеры)</span></label>
+          <label class="option"><input type="checkbox" name="q24_skills" value="Видео/аудио"><span>Делать видео и аудио</span></label>
+          <label class="option"><input type="checkbox" name="q24_skills" value="Агенты"><span>Собирать ИИ-агентов под свои задачи</span></label>
+          <label class="option"><input type="checkbox" name="q24_skills" value="Автоматизация"><span>Автоматизировать рутину (отчёты, сводки, мониторинг)</span></label>
+          <label class="option"><input type="checkbox" name="q24_skills" value="Анализ данных"><span>Анализировать данные</span></label>
+          <label class="option"><input type="checkbox" name="q24_skills" value="Безопасность"><span>Работать безопасно с конфиденциальными данными</span></label>
+          <label class="option"><input type="checkbox" name="q24_skills" value="Фактчек"><span>Фактчекинг и проверка ИИ-ответов</span></label>
+          <label class="option"><input type="checkbox" name="q24_skills" value="Медиапродукты"><span>Делать готовые медиапродукты (посты, ролики, креативы)</span></label>
+        </div>
+        <input type="text" name="q24_skills_other" placeholder="Другое (если есть)" style="margin-top:8px;">
+      </div>
+
+      <div class="question">
+        <label class="question-label">20. Закончите фразу: «Через 4 недели после обучения я смогу…» <span class="required">*</span></label>
+        <textarea name="q25_4weeks" required placeholder="Одно-два предложения — ваша главная цель"></textarea>
+      </div>
+
+      <div class="question">
+        <label class="question-label">21. Сколько часов в неделю готовы выделять на практику между занятиями?</label>
+        <div class="options">
+          <label class="option"><input type="radio" name="q26_practice_time" value="До 1 часа"><span>До 1 часа</span></label>
+          <label class="option"><input type="radio" name="q26_practice_time" value="1–2 часа"><span>1–2 часа</span></label>
+          <label class="option"><input type="radio" name="q26_practice_time" value="3–5 часов"><span>3–5 часов</span></label>
+          <label class="option"><input type="radio" name="q26_practice_time" value="Больше 5 часов"><span>Больше 5 часов</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label class="question-label">22. Когда вам удобно заниматься?</label>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="q27_schedule" value="Утро (до 12:00)"><span>Утро (до 12:00)</span></label>
+          <label class="option"><input type="checkbox" name="q27_schedule" value="День (12:00–17:00)"><span>День (12:00–17:00)</span></label>
+          <label class="option"><input type="checkbox" name="q27_schedule" value="Вечер (после 17:00)"><span>Вечер (после 17:00)</span></label>
+          <label class="option"><input type="checkbox" name="q27_schedule" value="Выходные"><span>Выходные</span></label>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn" id="submitBtn">Отправить ответы</button>
+  </form>
+
+  <div class="footer">
+    Ваши ответы увижу только я. Анонимность гарантирую.
+  </div>
+</div>
+
+<script>
+  // Если появится Google Apps Script для сбора в таблицу — вставьте сюда URL:
+  var SCRIPT_URL = '';
+  var FALLBACK_EMAIL = 'vladimir.volkomorov@gmail.com';
+
+  var LABELS = {
+    participant_name: 'Имя',
+    participant_contact: 'Контакт',
+    q1_top5_tasks: '1. Топ-5 задач за неделю',
+    q2_routine_hours: '2. Часы рутины',
+    q3_focus: '3. Направления маркетинга',
+    q4_burning_task: '4. «Горящая» задача',
+    q5_ai_freq: '5. Как давно использует ИИ',
+    q6_tools: '6. Инструменты',
+    q6_tools_other: '6. Инструменты — другое',
+    q7_subscriptions: '7. Платная подписка',
+    q7_subscriptions_list: '7. Какие подписки',
+    q8_uses: '8. Что делал с ИИ',
+    q9_prev_training: '9. Предыдущее обучение ИИ',
+    q10_sit1_headlines: 'Ситуация 1 — Заголовки и лиды',
+    q11_sit2_visual: 'Ситуация 2 — Визуал',
+    q12_sit3_factcheck: 'Ситуация 3 — Фактчек',
+    q13_sit4_automation: 'Ситуация 4 — Автоматизация',
+    q14_sit5_privacy: 'Ситуация 5 — Конфиденциальность',
+    q15_prompting: '10. Как формулирует запросы',
+    q16_fewshot: '11. Few-shot',
+    q16_cot: '11. Chain-of-thought',
+    q16_systemprompt: '11. System prompt',
+    q16_agents: '11. ИИ-агенты',
+    q16_rag: '11. RAG',
+    q16_local: '11. Локальные LLM',
+    q17_agents: '12. Готовые ИИ-агенты',
+    q18_data: '13. Загружаемые данные',
+    q19_privacy_rules: '14. Что нельзя загружать',
+    q20_barriers: '15. Барьеры',
+    q20_barriers_other: '15. Барьеры — другое',
+    q21_ai_failed: '16. Случай, когда ИИ подвёл',
+    q22_confidence: '17. Уверенность в оценке результата',
+    q23_main_goal: '18. Главное от обучения',
+    q24_skills: '19. Три навыка',
+    q24_skills_other: '19. Навыки — другое',
+    q25_4weeks: '20. Через 4 недели я смогу',
+    q26_practice_time: '21. Время на практику',
+    q27_schedule: '22. Удобное время занятий'
+  };
+
+  var form = document.getElementById('mainForm');
+  var progressBar = document.getElementById('progressBar');
+  var progressText = document.getElementById('progressText');
+  var submitBtn = document.getElementById('submitBtn');
+  var requiredFields = form.querySelectorAll('[required]');
+  var allInteractive = form.querySelectorAll('input, textarea, select');
+
+  function updateProgress() {
+    var filled = 0;
+    requiredFields.forEach(function(field) {
+      if (field.type === 'radio' || field.type === 'checkbox') return;
+      if (field.value.trim()) filled++;
+    });
+    requiredFields.forEach(function(field) {
+      if (field.type !== 'radio') return;
+      if (form.querySelector('input[name="' + field.name + '"]:checked')) filled++;
+    });
+    var percent = Math.min(100, Math.round((filled / requiredFields.length) * 100));
+    progressBar.style.width = percent + '%';
+    progressText.textContent = percent + '%';
+  }
+
+  allInteractive.forEach(function(el) {
+    el.addEventListener('input', updateProgress);
+    el.addEventListener('change', updateProgress);
+  });
+
+  function showThankYou(sentTo) {
+    document.querySelector('.container').innerHTML =
+      '<div class="header"><h1>Спасибо!</h1><p>Ваши ответы получены.</p></div>' +
+      '<div class="thankyou">' +
+      '<h2>✓ Анкета заполнена</h2>' +
+      '<p>Я свяжусь с вами с персональной программой — с какой темы начать и какие материалы посмотреть заранее.</p>' +
+      '<p class="secondary">Отправлено в: ' + sentTo + '</p>' +
+      '<p class="secondary">Можете закрыть эту вкладку.</p>' +
+      '</div>';
+    window.scrollTo(0, 0);
+  }
+
+  function buildMailtoFallback(formData) {
+    var body = 'ОТВЕТ НА ВХОДНУЮ АНКЕТУ (индивидуальное обучение маркетолога)\n\n';
+    Object.keys(LABELS).forEach(function(key) {
+      if (formData[key] === undefined) return;
+      var val = Array.isArray(formData[key]) ? formData[key].join(', ') : formData[key];
+      body += LABELS[key] + ': ' + val + '\n\n';
+    });
+    var subject = encodeURIComponent('Входная анкета ИИ: ' + (formData.participant_name || 'участник'));
+    return 'mailto:' + FALLBACK_EMAIL + '?subject=' + subject + '&body=' + encodeURIComponent(body);
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var missing = [];
+    requiredFields.forEach(function(field) {
+      if (field.type === 'radio') {
+        if (!form.querySelector('input[name="' + field.name + '"]:checked')) missing.push(field.name);
+      } else if (!field.value.trim()) {
+        missing.push(field.name);
+      }
+    });
+    if (missing.length > 0) {
+      alert('Пожалуйста, заполните все обязательные поля. Осталось: ' + missing.length);
+      var firstMissing = form.querySelector('[name="' + missing[0] + '"]');
+      if (firstMissing) firstMissing.scrollIntoView({behavior: 'smooth', block: 'center'});
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Отправляю...';
+
+    var formData = {};
+    new FormData(form).forEach(function(value, key) {
+      if (formData[key] !== undefined) {
+        if (!Array.isArray(formData[key])) formData[key] = [formData[key]];
+        formData[key].push(value);
+      } else {
+        formData[key] = value;
+      }
+    });
+
+    if (!SCRIPT_URL) {
+      window.location.href = buildMailtoFallback(formData);
+      showThankYou('Email (резервный способ)');
+      return;
+    }
+
+    var didSendToScript = false;
+    var fetchPromise = fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(formData)
+    }).then(function() { didSendToScript = true; }).catch(function() {});
+
+    var timeoutPromise = new Promise(function(resolve) { setTimeout(resolve, 5000); });
+
+    Promise.race([fetchPromise, timeoutPromise]).then(function() {
+      if (didSendToScript) {
+        showThankYou('Google Sheets');
+      } else {
+        window.location.href = buildMailtoFallback(formData);
+        showThankYou('Email (резервный способ)');
+      }
+    });
+  });
+
+  updateProgress();
+</script>
+</body>
+</html>
